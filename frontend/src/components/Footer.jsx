@@ -1,20 +1,20 @@
 import { Link } from 'react-router-dom';
 
 const navLinks = [
-  { to: '/', label: 'Casa' },
-  { to: '/services', label: 'Servizi' },
-  { to: '/about', label: 'Chi Siamo' },
-  { to: '/smart-connect', label: 'Connessione Intelligente' },
+  { to: '/', label: 'Home' },
+  { to: '/services', label: 'Services' },
+  { to: '/about', label: 'About Us' },
+  { to: '/smart-connect', label: 'Smart Connection' },
   { to: '/fnb', label: 'Food & Beverage' },
-  { to: '/contact', label: 'Contatto' },
+  { to: '/contact', label: 'Contact' },
 ];
 
 const services = [
-  'Immobiliare e Consulenza',
-  'Prestiti in Oro',
-  'Gestione Patrimoniale (Dubai)',
-  'Piattaforma Smart Connect',
-  'Ristorazione & F&B',
+  'Real Estate & Consulting',
+  'Gold Loans',
+  'Wealth Management (Dubai)',
+  'Smart Connect Platform',
+  'Restaurants & F&B',
 ];
 
 export default function Footer() {
@@ -24,16 +24,16 @@ export default function Footer() {
         <div className="footer-grid">
           <div className="footer-brand">
             <div className="footer-brand-name">JB CROWNSTONE</div>
-            <div className="footer-brand-tagline">Gestione Patrimoniale &amp; Ricchezza Privata</div>
+            <div className="footer-brand-tagline">Wealth Management &amp; Private Wealth</div>
             <p className="footer-brand-desc">
-              Una società di gestione patrimoniale privata dedicata a fornire strategie
-              di investimento di livello istituzionale a clienti privati e family office
-              selezionati in tutto il mondo.
+              A private wealth management firm dedicated to providing institutional-grade
+              investment strategies to select private clients and family offices
+              around the world.
             </p>
           </div>
 
           <div className="footer-col">
-            <div className="footer-col-title">Navigazione</div>
+            <div className="footer-col-title">Navigation</div>
             <ul>
               {navLinks.map((link) => (
                 <li key={link.to}>
@@ -44,7 +44,7 @@ export default function Footer() {
           </div>
 
           <div className="footer-col">
-            <div className="footer-col-title">Servizi</div>
+            <div className="footer-col-title">Services</div>
             <ul>
               {services.map((s) => (
                 <li key={s}>
@@ -55,13 +55,13 @@ export default function Footer() {
           </div>
 
           <div className="footer-col">
-            <div className="footer-col-title">Contatto</div>
+            <div className="footer-col-title">Contact</div>
             <ul>
               <li>
                 <a href="mailto:admin@jbcrownstone.com">admin@jbcrownstone.com</a>
               </li>
               <li>
-                <span style={{ color: 'rgba(255,255,255,0.45)' }}>Dubai (Prossimamente)</span>
+                <span style={{ color: 'rgba(255,255,255,0.45)' }}>Dubai (Coming Soon)</span>
               </li>
               <li>
                 <a href="https://jbcrownstone.com" target="_blank" rel="noreferrer">
@@ -75,9 +75,9 @@ export default function Footer() {
 
       <div className="footer-bottom">
         <span className="footer-copy">
-          © 2024 JB Crownstone. Tutti i diritti riservati. Gli investimenti comportano rischi.
+          © 2024 JB Crownstone. All rights reserved. Investments involve risks.
         </span>
-        <span className="footer-est">FONDATO NEL 2021</span>
+        <span className="footer-est">FOUNDED IN 2021</span>
       </div>
     </footer>
   );
