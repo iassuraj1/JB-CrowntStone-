@@ -35,7 +35,7 @@ export default function Login() {
     <div className="auth-page">
       <div className="auth-card">
         <div className="auth-logo">
-          <img src="/shield_jb_logo.png" alt="JB Crownstone" />
+          <img src="/ldb.png" alt="JB Crownstone" />
         </div>
         <p className="auth-eyebrow">Private Client Portal</p>
         <h1 className="auth-title">Welcome Back</h1>
@@ -64,6 +64,17 @@ export default function Login() {
           Don't have an account?{' '}
           <Link to="/signup">Create Account</Link>
         </p>
+
+        {/* <div className="auth-platform-action">
+          <a
+            href={TRADING_PLATFORM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-outline auth-platform-btn"
+          >
+            Trading Platform
+          </a>
+        </div> */}
       </div>
     </div>
   );

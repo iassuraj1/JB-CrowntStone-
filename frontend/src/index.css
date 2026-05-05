@@ -983,6 +983,30 @@ img { max-width: 100%; display: block; }
 }
 .auth-switch a { color: var(--gold-primary); font-weight: 600; }
 .auth-switch a:hover { text-decoration: underline; }
+.auth-platform-action {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+.auth-platform-btn {
+  min-width: 220px;
+  padding: 12px 24px;
+  border-color: rgba(216, 183, 106, 0.3);
+  background:
+    linear-gradient(145deg, rgba(216, 183, 106, 0.06), rgba(79, 140, 255, 0.035)),
+    rgba(245, 241, 232, 0.035);
+}
+
+/* -- JBours direct platform view ----------- */
+.jbours-direct-frame {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  width: 100vw;
+  height: 100vh;
+  border: 0;
+  background: #06070b;
+}
 
 /* ── Dashboard ───────────────────────────── */
 .dashboard-page { min-height: 100vh; padding-top: 0; position: relative; z-index: 3; }

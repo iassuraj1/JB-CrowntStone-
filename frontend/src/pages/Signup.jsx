@@ -38,7 +38,7 @@ export default function Signup() {
     <div className="auth-page">
       <div className="auth-card">
         <div className="auth-logo">
-          <img src="/shield_jb_logo.png" alt="JB Crownstone" />
+          <img src="/ldb.png" alt="JB Crownstone" />
         </div>
         <p className="auth-eyebrow">Private Client Portal</p>
         <h1 className="auth-title">Create Account</h1>

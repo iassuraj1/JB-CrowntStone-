@@ -1,0 +1,1 @@
+export const TRADING_PLATFORM_URL = import.meta.env.VITE_TRADING_PLATFORM_URL;

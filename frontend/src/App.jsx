@@ -14,6 +14,7 @@ import Contact from './pages/Contact';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
+import JBours from './pages/JBours';
 
 function AppInner() {
   const location = useLocation();
@@ -22,12 +23,14 @@ function AppInner() {
     window.scrollTo(0, 0);
   }, [location.pathname]);
 
-  const authPage = ['/login', '/signup'].includes(location.pathname);
+  const currentPath = location.pathname.toLowerCase();
+  const authPage = ['/login', '/signup'].includes(currentPath);
+  const standalonePage = authPage || currentPath.startsWith('/jbours');
 
   return (
     <div className="app">
       <BackgroundCanvas />
-      {!authPage && <Navbar />}
+      {!standalonePage && <Navbar />}
       <main key={location.pathname} className="page-enter">
         <Routes>
           <Route path="/"            element={<Home />} />
@@ -41,9 +44,10 @@ function AppInner() {
           <Route path="/dashboard"   element={
             <ProtectedRoute><Dashboard /></ProtectedRoute>
           } />
+          <Route path="/JBours/*"     element={<JBours />} />
         </Routes>
       </main>
-      {!authPage && <Footer />}
+      {!standalonePage && <Footer />}
     </div>
   );
 }

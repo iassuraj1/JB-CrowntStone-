@@ -21,7 +21,7 @@ const LuxuryBooklet = () => {
 
       {/* PAGE 1: COVER */}
       <Page number={1} className="page-cover">
-        <img src="/logojbc.png" alt="JB Crownstone Logo" className="cover-logo" />
+        <img src="/.png" alt="JB Crownstone Logo" className="cover-logo" />
         <h1 className="title-large gold-text">Curated Luxury Real Estate Platform</h1>
         <p className="subtitle">India’s Premium Property Exchange</p>
       </Page>
@@ -263,7 +263,7 @@ const LuxuryBooklet = () => {
 
       {/* PAGE 18: FINAL PAGE */}
       <Page number={18} className="page-cover">
-        <img src="/logojbc.png" alt="JB Crownstone Logo" className="cover-logo" style={{ width: '80px', marginBottom: '20px' }} />
+        <img src="/.png" alt="JB Crownstone Logo" className="cover-logo" style={{ width: '80px', marginBottom: '20px' }} />
         <h2 className="subtitle-medium">Vision</h2>
         <div className="content-body" style={{ fontSize: '24px', fontStyle: 'italic' }}>
           "We are building the most trusted and premium real estate platform in India."
