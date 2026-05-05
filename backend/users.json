@@ -12,5 +12,12 @@
     "email": "ak@gmail.com",
     "password": "$2b$12$rPcuzV5ss0tEa./TJCvbVeuyVUGrSlbOoX5tStkaqDc7K16TILpEi",
     "createdAt": "2026-05-01T07:45:27.609Z"
+  },
+  {
+    "id": "1777889692174",
+    "name": "rohit",
+    "email": "namo@gmail.com",
+    "password": "$2b$12$HQ3LEvDYhYAOxZO2qa9qwubOkpvWsrAIo0MSRlffLzElnCoVeY9ci",
+    "createdAt": "2026-05-04T10:14:52.174Z"
   }
 ]

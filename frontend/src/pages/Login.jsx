@@ -50,7 +50,7 @@ export default function Login() {
           <div className="auth-field">
             <label>Password</label>
             <input name="password" type="password" value={form.password}
-              onChange={handleChange} placeholder="••••••••" required />
+              onChange={handleChange} placeholder="********" required />
           </div>
 
           {error && <p className="auth-error">{error}</p>}

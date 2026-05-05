@@ -1,9 +1,17 @@
 import { useRef, useEffect } from 'react';
 
 const GOLD        = { r: 220, g: 178, b: 80 };
-const N           = 85;
+const BASE_COUNT  = 82;
 const CONNECT     = 155;
 const MOUSE_R     = 130;
+const CONNECT_SQ  = CONNECT * CONNECT;
+
+const getCanvasScale = () => Math.min(window.devicePixelRatio || 1, 1.5);
+const getParticleCount = () => {
+  if (window.innerWidth < 540) return 38;
+  if (window.innerWidth < 900) return 58;
+  return BASE_COUNT;
+};
 
 class Particle {
   constructor(w, h) {
@@ -68,29 +76,43 @@ export default function HeroCanvas() {
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx    = canvas.getContext('2d');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let id;
+    let dpr = 1;
     let t = 0;
+    let running = false;
     let particles = [];
     const mouse = { x: -9999, y: -9999 };
 
     const init = () => {
-      canvas.width  = canvas.parentElement.offsetWidth;
-      canvas.height = canvas.parentElement.offsetHeight;
-      particles = Array.from({ length: N }, () => new Particle(canvas.width, canvas.height));
+      const parent = canvas.parentElement;
+      const width = parent.offsetWidth;
+      const height = parent.offsetHeight;
+      dpr = getCanvasScale();
+      canvas.width  = Math.max(1, Math.floor(width * dpr));
+      canvas.height = Math.max(1, Math.floor(height * dpr));
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      particles = Array.from({ length: getParticleCount() }, () => new Particle(width, height));
     };
 
     const draw = () => {
+      if (!running) return;
       t++;
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       const { r, g, b } = GOLD;
 
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const dx   = particles[i].x - particles[j].x;
           const dy   = particles[i].y - particles[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < CONNECT) {
-            ctx.strokeStyle = `rgba(${r},${g},${b},${0.24 * (1 - dist / CONNECT)})`;
+          const distSq = dx * dx + dy * dy;
+          if (distSq < CONNECT_SQ) {
+            const dist = Math.sqrt(distSq);
+            ctx.strokeStyle = `rgba(${r},${g},${b},${0.2 * (1 - dist / CONNECT)})`;
             ctx.lineWidth   = 0.65;
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
@@ -105,21 +127,36 @@ export default function HeroCanvas() {
     };
 
     init();
-    draw();
+    if (reduceMotion) return undefined;
+
+    const start = () => {
+      if (running) return;
+      running = true;
+      id = requestAnimationFrame(draw);
+    };
+    const stop = () => {
+      running = false;
+      cancelAnimationFrame(id);
+    };
 
     const parent = canvas.parentElement;
     const onMove  = (e) => { const rc = parent.getBoundingClientRect(); mouse.x = e.clientX - rc.left; mouse.y = e.clientY - rc.top; };
     const onLeave = ()  => { mouse.x = -9999; mouse.y = -9999; };
+    const onVisibility = () => { if (document.hidden) stop(); else start(); };
+
+    start();
 
     parent.addEventListener('mousemove', onMove);
     parent.addEventListener('mouseleave', onLeave);
     window.addEventListener('resize', init);
+    document.addEventListener('visibilitychange', onVisibility);
 
     return () => {
-      cancelAnimationFrame(id);
+      stop();
       parent.removeEventListener('mousemove', onMove);
       parent.removeEventListener('mouseleave', onLeave);
       window.removeEventListener('resize', init);
+      document.removeEventListener('visibilitychange', onVisibility);
     };
   }, []);
 
@@ -129,6 +166,7 @@ export default function HeroCanvas() {
       style={{
         position: 'absolute', inset: 0,
         width: '100%', height: '100%',
+        opacity: 0.78,
         pointerEvents: 'none', zIndex: 2,
       }}
     />

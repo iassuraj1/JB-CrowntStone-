@@ -1,0 +1,120 @@
+# =========================
+# OS / EDITOR
+# =========================
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# =========================
+# ENVIRONMENT / SECRETS
+# =========================
+.env
+.env.*
+**/.env
+**/.env.*
+!.env.example
+!**/.env.example
+
+# Local certificates and keys
+*.pem
+*.key
+*.crt
+*.p12
+
+# =========================
+# LOGS / RUNTIME FILES
+# =========================
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+*.pid
+*.seed
+*.pid.lock
+.pm2/
+pm2.log
+dump.pm2
+
+# =========================
+# NODE / FRONTEND / BACKEND
+# =========================
+node_modules/
+**/node_modules/
+
+dist/
+build/
+coverage/
+**/dist/
+**/build/
+**/coverage/
+
+.vite/
+.vite-temp/
+**/.vite/
+**/.vite-temp/
+.cache/
+**/.cache/
+
+# Package-manager local stores
+.npm/
+.pnpm-store/
+.yarn/
+!.yarn/patches/
+!.yarn/plugins/
+!.yarn/releases/
+!.yarn/sdks/
+!.yarn/versions/
+
+# =========================
+# PYTHON
+# =========================
+venv/
+.venv/
+env/
+python/venv/
+python/.venv/
+
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# =========================
+# DATABASE / LOCAL DATA
+# =========================
+*.sqlite
+*.sqlite3
+*.db
+*.db-journal
+
+# =========================
+# TEMPORARY FILES
+# =========================
+tmp/
+temp/
+*.tmp
+*.bak
+*.swp
+*.swo

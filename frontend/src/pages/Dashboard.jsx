@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 const metrics = [
-  { label: 'Portfolio Value',  value: '—',      note: 'Pending advisor review' },
+  { label: 'Portfolio Value',  value: '-',      note: 'Pending advisor review' },
   { label: 'Active Services',  value: '0',       note: 'No active services yet' },
   { label: 'Open Enquiries',   value: '0',       note: 'All enquiries resolved' },
   { label: 'Member Since',     value: null,      note: '' },
@@ -26,7 +26,7 @@ export default function Dashboard() {
 
   const joined = user?.createdAt
     ? new Date(user.createdAt).toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' })
-    : '—';
+    : '-';
 
   return (
     <div className="dashboard-page">
@@ -90,7 +90,7 @@ export default function Dashboard() {
 
           {/* Notice */}
           <div className="dash-card dash-card-notice">
-            <div className="dash-notice-icon">👑</div>
+            <div className="dash-notice-icon">JB</div>
             <h3>Your Advisor Will Be In Touch</h3>
             <p>
               A dedicated JB Crownstone relationship manager will contact you within

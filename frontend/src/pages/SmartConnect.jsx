@@ -10,29 +10,29 @@ const features = [
 ];
 
 const tickers = [
-  { symbol: 'GOLD', value: '$2,384', change: '▲ +1.2%', direction: 'up' },
-  { symbol: 'AED/USD', value: '0.2723', change: '▲ +0.4%', direction: 'up' },
-  { symbol: 'RE IDX', value: '4,821', change: '▼ -0.3%', direction: 'dn' },
+  { symbol: 'GOLD', value: '$2,384', change: '+1.2%', direction: 'up' },
+  { symbol: 'AED/USD', value: '0.2723', change: '+0.4%', direction: 'up' },
+  { symbol: 'RE IDX', value: '4,821', change: '-0.3%', direction: 'dn' },
 ];
 
 const benefits = [
   {
-    icon: '⚡',
+    icon: 'RT',
     title: 'Real-Time Execution',
     text: 'Millisecond-level order execution powered by co-located infrastructure.',
   },
   {
-    icon: '🔒',
+    icon: 'SEC',
     title: 'Bank-Grade Security',
     text: 'End-to-end encryption with multi-factor authentication and audit trails.',
   },
   {
-    icon: '📈',
+    icon: 'AI',
     title: 'Alpha Generation',
     text: 'Proprietary signals derived from decades of quantitative research.',
   },
   {
-    icon: '🎯',
+    icon: 'RM',
     title: 'Precision Targeting',
     text: 'Customizable risk parameters aligned to your investment mandate.',
   },
@@ -52,7 +52,7 @@ export default function SmartConnect() {
           </h1>
           <p className="page-hero-desc animate delay-2">
             Our proprietary platform bridges your investment strategy with intelligent
-            algorithmic execution — giving you an institutional-grade edge.
+            algorithmic execution - giving you an institutional-grade edge.
           </p>
         </div>
       </div>
@@ -68,7 +68,7 @@ export default function SmartConnect() {
                   <div className="algo-dot r" />
                   <div className="algo-dot y" />
                   <div className="algo-dot g" />
-                  <span className="algo-title-bar">CROWNSTONE · SMART CONNECT</span>
+                  <span className="algo-title-bar">CROWNSTONE / SMART CONNECT</span>
                 </div>
                 <div className="algo-line">
                   <span className="algo-lnum">01</span>
@@ -108,7 +108,7 @@ export default function SmartConnect() {
                   <span>
                     <span className="algo-kw">return</span> portfolio.
                     <span className="algo-code">optimize</span>();{' '}
-                    <span className="algo-comment">// ✓ returns alpha</span>
+                    <span className="algo-comment">// returns alpha</span>
                   </span>
                 </div>
                 <div className="algo-ticker-row">
@@ -146,7 +146,7 @@ export default function SmartConnect() {
 
               <div className="badge-waitlist">
                 <span className="badge-pulse-dot" />
-                Coming Soon — Join the Waitlist
+                Coming Soon - Join the Waitlist
               </div>
 
               <div style={{ marginTop: '24px' }}>

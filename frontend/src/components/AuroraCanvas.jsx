@@ -9,25 +9,40 @@ const BLOBS = [
   { cx: 0.50, cy: 0.10, r: 0.35, color: [80,  40, 160],  spd: 0.00050, phase: 5.8 },
 ];
 
+const getCanvasScale = () => Math.min(window.devicePixelRatio || 1, 1.25);
+
 export default function AuroraCanvas() {
   const ref = useRef(null);
 
   useEffect(() => {
     const canvas = ref.current;
     const ctx = canvas.getContext('2d');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let id;
+    let dpr = 1;
     let t = 0;
+    let running = false;
 
     const resize = () => {
-      canvas.width  = canvas.parentElement.offsetWidth;
-      canvas.height = canvas.parentElement.offsetHeight;
+      const parent = canvas.parentElement;
+      const width = parent.offsetWidth;
+      const height = parent.offsetHeight;
+      dpr = getCanvasScale();
+      canvas.width  = Math.max(1, Math.floor(width * dpr));
+      canvas.height = Math.max(1, Math.floor(height * dpr));
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
 
     const draw = () => {
+      if (!running) return;
       t++;
-      const W = canvas.width;
-      const H = canvas.height;
-      ctx.clearRect(0, 0, W, H);
+      const W = canvas.parentElement.offsetWidth;
+      const H = canvas.parentElement.offsetHeight;
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
       BLOBS.forEach((b) => {
         const x = (b.cx + Math.sin(t * b.spd + b.phase) * 0.24) * W;
@@ -48,11 +63,26 @@ export default function AuroraCanvas() {
     };
 
     resize();
-    draw();
-    window.addEventListener('resize', resize);
-    return () => {
+    if (reduceMotion) return undefined;
+
+    const start = () => {
+      if (running) return;
+      running = true;
+      id = requestAnimationFrame(draw);
+    };
+    const stop = () => {
+      running = false;
       cancelAnimationFrame(id);
+    };
+    const onVisibility = () => { if (document.hidden) stop(); else start(); };
+
+    start();
+    window.addEventListener('resize', resize);
+    document.addEventListener('visibilitychange', onVisibility);
+    return () => {
+      stop();
       window.removeEventListener('resize', resize);
+      document.removeEventListener('visibilitychange', onVisibility);
     };
   }, []);
 
@@ -62,6 +92,7 @@ export default function AuroraCanvas() {
       style={{
         position: 'absolute', inset: 0,
         width: '100%', height: '100%',
+        opacity: 0.54,
         pointerEvents: 'none', zIndex: 1,
       }}
     />

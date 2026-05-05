@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { NavLink, Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
@@ -14,6 +14,7 @@ const navLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled]   = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const navRef = useRef(null);
   const location = useLocation();
   const navigate  = useNavigate();
   const { user, logout } = useAuth();
@@ -24,15 +25,49 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  useEffect(() => {
+    const nav = navRef.current;
+    if (!nav) return undefined;
+
+    const setNavbarHeight = () => {
+      document.documentElement.style.setProperty('--navbar-height', `${nav.offsetHeight}px`);
+    };
+
+    setNavbarHeight();
+    window.addEventListener('resize', setNavbarHeight);
+
+    let observer;
+    if ('ResizeObserver' in window) {
+      observer = new ResizeObserver(setNavbarHeight);
+      observer.observe(nav);
+    }
+
+    return () => {
+      window.removeEventListener('resize', setNavbarHeight);
+      observer?.disconnect();
+    };
+  }, []);
+
   useEffect(() => { setMobileOpen(false); }, [location.pathname]);
 
   const handleLogout = () => { logout(); navigate('/'); };
 
   return (
-    <nav className={`navbar${scrolled ? ' scrolled' : ''}`}>
+    <nav ref={navRef} className={`navbar${scrolled ? ' scrolled' : ''}`}>
       <div className="navbar-inner">
         <Link to="/" className="nav-logo">
-          <img src="/shield_jb_logo.png" alt="JB Crownstone" className="nav-logo-img" />
+          <span className="nav-logo-mark" aria-hidden="true">
+            <img
+              src="/ldb-192.png"
+              alt=""
+              className="nav-logo-img"
+              width="192"
+              height="234"
+              loading="eager"
+              decoding="async"
+              fetchPriority="high"
+            />
+          </span>
           <div>
             <span className="nav-brand-text">JB Crownstone</span>
             <span className="nav-tagline">Private Wealth &amp; Asset Management</span>

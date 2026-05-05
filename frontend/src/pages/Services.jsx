@@ -3,7 +3,7 @@ import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 const services = [
   {
-    emoji: '🏙️',
+    emoji: 'RE',
     badge: 'Active',
     title: 'Crownstone Private Wealth\nReal Estate & Advisory',
     desc: 'Exclusive opportunities and strategic investment advice in prime global real estate development.',
@@ -18,7 +18,7 @@ const services = [
     external: true,
   },
   {
-    emoji: '🏅',
+    emoji: 'GLD',
     badge: 'Coming Soon',
     title: 'Crownstone\nGold Loans',
     desc: 'Unlocking asset value through secure, asset-backed gold financing solutions.',
@@ -32,7 +32,7 @@ const services = [
     href: '/contact',
   },
   {
-    emoji: '🌐',
+    emoji: 'AM',
     badge: 'Coming Soon',
     title: 'Crownstone Asset Management\n(Dubai)',
     desc: 'Regional expertise and specialized portfolio management in high-growth markets.',

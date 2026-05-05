@@ -1,9 +1,17 @@
 import { useRef, useEffect } from 'react';
 
 const GOLD  = { r: 212, g: 175, b: 55 };
-const N     = 80;
+const BASE_COUNT = 74;
 const CONN  = 160;
 const MOUSE_R = 140;
+const CONN_SQ = CONN * CONN;
+
+const getCanvasScale = () => Math.min(window.devicePixelRatio || 1, 1.35);
+const getStarCount = () => {
+  if (window.innerWidth < 540) return 34;
+  if (window.innerWidth < 900) return 52;
+  return BASE_COUNT;
+};
 
 class Star {
   constructor(w, h) { this.w = w; this.h = h; this.init(); }
@@ -63,29 +71,39 @@ export default function BackgroundCanvas() {
   useEffect(() => {
     const canvas = ref.current;
     const ctx = canvas.getContext('2d');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let id, t = 0;
+    let dpr = 1;
+    let running = false;
     let stars = [];
     const mouse = { x: -9999, y: -9999 };
 
     const resize = () => {
-      canvas.width  = window.innerWidth;
-      canvas.height = window.innerHeight;
-      stars = Array.from({ length: N }, () => new Star(canvas.width, canvas.height));
+      dpr = getCanvasScale();
+      canvas.width  = Math.max(1, Math.floor(window.innerWidth * dpr));
+      canvas.height = Math.max(1, Math.floor(window.innerHeight * dpr));
+      canvas.style.width = `${window.innerWidth}px`;
+      canvas.style.height = `${window.innerHeight}px`;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      stars = Array.from({ length: getStarCount() }, () => new Star(window.innerWidth, window.innerHeight));
     };
 
     const draw = () => {
+      if (!running) return;
       t++;
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       const { r, g, b } = GOLD;
 
-      // Draw constellation lines
       for (let i = 0; i < stars.length; i++) {
         for (let j = i + 1; j < stars.length; j++) {
           const dx   = stars[i].x - stars[j].x;
           const dy   = stars[i].y - stars[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < CONN) {
-            ctx.strokeStyle = `rgba(${r},${g},${b},${0.18 * (1 - dist / CONN)})`;
+          const distSq = dx * dx + dy * dy;
+          if (distSq < CONN_SQ) {
+            const dist = Math.sqrt(distSq);
+            ctx.strokeStyle = `rgba(${r},${g},${b},${0.15 * (1 - dist / CONN)})`;
             ctx.lineWidth   = 0.55;
             ctx.beginPath();
             ctx.moveTo(stars[i].x, stars[i].y);
@@ -100,20 +118,35 @@ export default function BackgroundCanvas() {
     };
 
     resize();
-    draw();
+    if (reduceMotion) return undefined;
+
+    const start = () => {
+      if (running) return;
+      running = true;
+      id = requestAnimationFrame(draw);
+    };
+    const stop = () => {
+      running = false;
+      cancelAnimationFrame(id);
+    };
 
     const onMove  = (e) => { mouse.x = e.clientX; mouse.y = e.clientY; };
     const onLeave = ()  => { mouse.x = -9999; mouse.y = -9999; };
+    const onVisibility = () => { if (document.hidden) stop(); else start(); };
+
+    start();
 
     window.addEventListener('mousemove', onMove);
     window.addEventListener('mouseleave', onLeave);
     window.addEventListener('resize', resize);
+    document.addEventListener('visibilitychange', onVisibility);
 
     return () => {
-      cancelAnimationFrame(id);
+      stop();
       window.removeEventListener('mousemove', onMove);
       window.removeEventListener('mouseleave', onLeave);
       window.removeEventListener('resize', resize);
+      document.removeEventListener('visibilitychange', onVisibility);
     };
   }, []);
 
@@ -124,7 +157,8 @@ export default function BackgroundCanvas() {
         position: 'fixed', inset: 0,
         width: '100%', height: '100%',
         pointerEvents: 'none',
-        zIndex: 2,
+        opacity: 0.58,
+        zIndex: 0,
       }}
     />
   );

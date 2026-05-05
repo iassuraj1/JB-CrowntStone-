@@ -159,15 +159,15 @@ app.post('/api/contact', async (req, res) => {
       from: `"JB Crownstone Website" <${process.env.SMTP_USER}>`,
       to: 'admin@jbcrownstone.com',
       replyTo: email,
-      subject: `New Enquiry — ${service || 'General Inquiry'}`,
+      subject: `New Enquiry - ${service || 'General Inquiry'}`,
       html: `
         <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;background:#0d0f1a;color:#e8dcc8;padding:40px;border-radius:8px;border:1px solid #c9a84c;">
           <h2 style="color:#c9a84c;margin-top:0;">New Website Enquiry</h2>
           <table style="width:100%;border-collapse:collapse;">
             <tr><td style="padding:10px 0;border-bottom:1px solid #333;color:#999;width:140px;">Name</td><td style="padding:10px 0;border-bottom:1px solid #333;">${name}</td></tr>
             <tr><td style="padding:10px 0;border-bottom:1px solid #333;color:#999;">Email</td><td style="padding:10px 0;border-bottom:1px solid #333;"><a href="mailto:${email}" style="color:#c9a84c;">${email}</a></td></tr>
-            <tr><td style="padding:10px 0;border-bottom:1px solid #333;color:#999;">Service</td><td style="padding:10px 0;border-bottom:1px solid #333;">${service || '—'}</td></tr>
-            <tr><td style="padding:10px 0;color:#999;vertical-align:top;">Message</td><td style="padding:10px 0;white-space:pre-wrap;">${message || '—'}</td></tr>
+            <tr><td style="padding:10px 0;border-bottom:1px solid #333;color:#999;">Service</td><td style="padding:10px 0;border-bottom:1px solid #333;">${service || '-'}</td></tr>
+            <tr><td style="padding:10px 0;color:#999;vertical-align:top;">Message</td><td style="padding:10px 0;white-space:pre-wrap;">${message || '-'}</td></tr>
           </table>
           <p style="margin-top:32px;font-size:12px;color:#555;">Sent via JB Crownstone contact form</p>
         </div>

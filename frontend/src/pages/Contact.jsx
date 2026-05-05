@@ -25,7 +25,7 @@ const contactItems = [
   },
   {
     label: 'Offices',
-    value: 'Global · Dubai (Coming Soon)',
+    value: 'Global / Dubai (Coming Soon)',
     link: null,
     icon: (
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -34,17 +34,17 @@ const contactItems = [
       </svg>
     ),
   },
-  {
-    label: 'Web',
-    value: 'jbcrownstone.com',
-    link: 'https://jbcrownstone.com',
-    icon: (
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <path d="M10 2a8 8 0 100 16A8 8 0 0010 2z" />
-        <path d="M10 2c-2 2.5-3 5-3 8s1 5.5 3 8M10 2c2 2.5 3 5 3 8s-1 5.5-3 8M2 10h16" />
-      </svg>
-    ),
-  },
+  // {
+  //   label: 'Web',
+  //   value: 'jbcrownstone.com',
+  //   link: 'https://jbcrownstone.com',
+  //   icon: (
+  //     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5">
+  //       <path d="M10 2a8 8 0 100 16A8 8 0 0010 2z" />
+  //       <path d="M10 2c-2 2.5-3 5-3 8s1 5.5 3 8M10 2c2 2.5 3 5 3 8s-1 5.5-3 8M2 10h16" />
+  //     </svg>
+  //   ),
+  // },
 ];
 
 export default function Contact() {
@@ -76,8 +76,8 @@ export default function Contact() {
       });
       let json = {};
       try { json = await res.json(); } catch { /* empty body */ }
-      if (!res.ok) throw new Error(json.error || 'Server error — is the backend running?');
-      setFormState({ status: 'sent', buttonText: "✓ Sent — We'll be in touch", disabled: true, error: '' });
+      if (!res.ok) throw new Error(json.error || 'Server error - is the backend running?');
+      setFormState({ status: 'sent', buttonText: "Sent - We'll be in touch", disabled: true, error: '' });
       setTimeout(() => {
         setFormState({ status: 'idle', buttonText: 'Send Enquiry', disabled: false, error: '' });
         e.target.reset();

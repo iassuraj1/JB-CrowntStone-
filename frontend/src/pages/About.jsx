@@ -9,22 +9,22 @@ const stats = [
 
 const pillars = [
   {
-    icon: '🛡️',
+    icon: 'TI',
     title: 'Trust & Integrity',
     text: 'Fiduciary-first approach to every client engagement and investment decision.',
   },
   {
-    icon: '📊',
+    icon: 'QA',
     title: 'Data-Driven',
     text: 'Quantitative models backed by deep fundamental research and real-time analytics.',
   },
   {
-    icon: '🌍',
+    icon: 'GA',
     title: 'Global Access',
     text: 'Cross-border opportunities in real estate, commodities, and financial markets.',
   },
   {
-    icon: '👑',
+    icon: 'LB',
     title: 'Legacy Building',
     text: 'Multi-generational wealth strategies that protect and perpetuate your prosperity.',
   },

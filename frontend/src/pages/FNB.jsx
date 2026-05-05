@@ -3,7 +3,7 @@ import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 const fnbOfferings = [
   {
-    icon: '🍷',
+    icon: 'VC',
     title: 'The Private Cellar',
     text: 'Access to an exclusive collection of rare vintages and limited-production spirits curated for the most discerning palates.',
     features: [
@@ -14,7 +14,7 @@ const fnbOfferings = [
     ]
   },
   {
-    icon: '🍽️',
+    icon: 'CA',
     title: 'Culinary Artistry',
     text: 'Bespoke dining experiences featuring world-renowned Michelin-starred chefs in the comfort of your private residence.',
     features: [
@@ -25,7 +25,7 @@ const fnbOfferings = [
     ]
   },
   {
-    icon: '🥂',
+    icon: 'ES',
     title: 'Elite Social Gatherings',
     text: 'Seamlessly executed high-profile events and private galas that set the standard for luxury hospitality.',
     features: [
@@ -67,12 +67,12 @@ export default function FNB() {
               <span className="fnb-candle" />
             </div>
             <div className="fnb-hero-text-center">
-              <div className="fnb-hero-eyebrow">Est. 2021 · Private Collection</div>
+              <div className="fnb-hero-eyebrow">Est. 2021 / Private Collection</div>
               <div className="fnb-hero-headline">The Art of Dining</div>
               <div className="fnb-hero-sub">Where culinary mastery meets private luxury</div>
             </div>
             <div className="fnb-hero-overlay">
-              <div className="fnb-hero-badge">Exclusive · Curated · Bespoke</div>
+              <div className="fnb-hero-badge">Exclusive / Curated / Bespoke</div>
             </div>
           </div>
         </div>
@@ -114,7 +114,7 @@ export default function FNB() {
               <p className="label">The Collection</p>
               <h2 className="heading">Rare Spirits & Vintages</h2>
               <p className="subheading">
-                Our procurement specialists source the world\'s most elusive beverages, from pre-prohibition whiskies to limited-run champagne magnums.
+                Our procurement specialists source the world's most elusive beverages, from pre-prohibition whiskies to limited-run champagne magnums.
               </p>
               <div className="fnb-stat-bar">
                 <div className="fnb-stat">
